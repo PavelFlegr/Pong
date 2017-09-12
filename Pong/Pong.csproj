@@ -80,6 +80,7 @@
     <Compile Include="Game\Models\Player.cs" />
     <Compile Include="Game\Models\Rectangle.cs" />
     <Compile Include="Game\Models\Vector.cs" />
+    <Compile Include="Game\Models\Wall.cs" />
     <Compile Include="Game\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>

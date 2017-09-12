@@ -89,23 +89,23 @@ namespace Pong.Game
                 if (gameObject.Bounds.Top > bounds.Top)
                 {
                     gameObject.Position = new Models.Vector(gameObject.Position.X, bounds.Top - gameObject.Size.Height / 2);
-                    gameObject.Collision(Collision.Bounds);
+                    gameObject.Collision(new Wall());
                 }
                 else if (gameObject.Bounds.Bottom < bounds.Bottom)
                 {
                     gameObject.Position = new Models.Vector(gameObject.Position.X, bounds.Bottom + gameObject.Size.Height / 2);
-                    gameObject.Collision(Collision.Bounds);
+                    gameObject.Collision(new Wall());
                 }
             }
 
             if (ball.Bounds.Left <= player1.Bounds.Right && ball.Bounds.Bottom < player1.Bounds.Top && ball.Bounds.Top > player1.Bounds.Bottom)
             {
                 ball.Position = new Models.Vector(player1.Bounds.Right + ball.Size.Width / 2, ball.Position.Y);
-                ball.Collision(Collision.Player);
+                ball.Collision(player1);
             }
             else if (ball.Bounds.Right >= player2.Bounds.Left && ball.Bounds.Bottom < player2.Bounds.Top && ball.Bounds.Top > player2.Bounds.Bottom)
             {
-                ball.Collision(Collision.Player);
+                ball.Collision(player2);
                 ball.Position = new Models.Vector(player2.Bounds.Left - ball.Size.Width / 2, ball.Position.Y);
             }
 

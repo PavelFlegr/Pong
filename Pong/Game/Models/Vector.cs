@@ -10,11 +10,15 @@ namespace Pong.Game.Models
     {
         public double X { get; set; }
         public double Y { get; set; }
+        public double Size { get; set; }
+        //same direction vector of size 1
+        public Vector Unit => new Vector(X / Size, Y / Size);
 
         public Vector(double x, double y)
         {
             X = x;
             Y = y;
+            Size = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2));
         }
 
         public void Deconstruct(out double x, out double y)

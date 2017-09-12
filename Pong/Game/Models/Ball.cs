@@ -8,22 +8,37 @@ namespace Pong.Game.Models
 {
     public class Ball : GameObject
     {
+        Random random;
+
         public Ball()
         {
             Size = new Rectangle(12, 12);
+            random = new Random();
         }
 
-        public override void Collision(Collision type)
+        public override void Update()
         {
-            switch (type)
+            var fraction = 500;
+            //increase total speed by 1/500
+            Velocity += new Vector(Velocity.Unit.X / fraction, Velocity.Unit.Y / fraction);
+        }
+
+        public override void Collision(GameObject gameObject)
+        {
+            switch (gameObject.GetType().Name)
             {
-                case Models.Collision.Bounds:
+                case nameof(Wall):
                     Velocity = new Vector(Velocity.X, -Velocity.Y);
                     break;
-                case Models.Collision.Player:
-                    Velocity = new Vector(-Velocity.X, Velocity.Y);
-                    var total = Velocity.X * Velocity.X + Velocity.Y * Velocity.Y;
-                    Velocity += new Vector(Velocity.X / total, Velocity.Y / total);
+                case nameof(Player):
+                case nameof(Computer):
+                    int xDir = Velocity.X > 0 ? -1 : 1;
+                    int yDir = Velocity.Y > 0 ? 1 : -1;
+                    double offset = Math.Abs(Position.Y - gameObject.Position.Y);
+                    double speed = Velocity.Size;
+                    double yMult = offset / (gameObject.Size.Height / 2) * 0.6;
+                    double xMult = 1 - yMult;
+                    Velocity = new Vector(speed * xMult * xDir, speed * yMult * yDir);
                     break;
             }
         }

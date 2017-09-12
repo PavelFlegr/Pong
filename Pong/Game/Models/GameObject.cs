@@ -33,6 +33,6 @@ namespace Pong.Game.Models
         Rectangle size;
 
         public virtual void Update() { }
-        public virtual void Collision(Collision type) { }
+        public virtual void Collision(GameObject gameObject) { }
     }
 }
