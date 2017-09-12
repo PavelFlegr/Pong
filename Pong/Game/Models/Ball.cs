@@ -38,7 +38,8 @@ namespace Pong.Game.Models
                     double speed = Velocity.Size;
                     double yMult = offset / (gameObject.Size.Height / 2) * 0.6;
                     double xMult = 1 - yMult;
-                    Velocity = new Vector(speed * xMult * xDir, speed * yMult * yDir);
+                    Vector unitVelocity = new Vector(xMult * xDir, yMult * yDir).Unit;
+                    Velocity = new Vector(speed * unitVelocity.X, speed * unitVelocity.Y);
                     break;
             }
         }
