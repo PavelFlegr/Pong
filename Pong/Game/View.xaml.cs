@@ -35,7 +35,7 @@ namespace Pong.Game
             game.Loaded += Game_Loaded;
         }
 
-        private void Game_Loaded(object sender, RoutedEventArgs e)
+        async private void Game_Loaded(object sender, RoutedEventArgs e)
         {
             bounds = new Bounds(new Models.Vector(0, 0), new Models.Rectangle(game.ActualWidth, game.ActualHeight));
             player1.Position = new Models.Vector(bounds.Left + 20, 0);
@@ -50,7 +50,9 @@ namespace Pong.Game
             gameObjects.Add(player2);
             gameObjects.Add(ball);
             var r = new Random();
-            ball.Velocity = new Models.Vector(r.Next(2) == 1 ? -5 : 5, r.Next(2) == 1 ? 2 : -2);
+            ball.Velocity = new Models.Vector(r.Next(2) == 1 ? -2 : 2, r.Next(2) == 1 ? 2 : -2);
+            Draw();
+            await Task.Delay(2000);
             CompositionTarget.Rendering += MainLoop;
         }
 
